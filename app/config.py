@@ -7,7 +7,7 @@ from pydantic import AnyUrl, BaseSettings
 CFG_LOGGER = logging.getLogger("app.config")
 
 
-class _Settings(BaseSettings): #comment
+class _Settings(BaseSettings):
     port: int = 5000
     rediscloud_url: AnyUrl = None
     local_redis_url: AnyUrl = None
