@@ -13,7 +13,7 @@ from fastapi.responses import JSONResponse
 from scout_apm.async_.starlette import ScoutMiddleware
 from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 
-from .config import get_settings
+from .config import _Settings
 from .data import data_source
 from .routers import V1, V2
 from .utils.httputils import setup_client_session, teardown_client_session
@@ -23,7 +23,7 @@ from .utils.httputils import setup_client_session, teardown_client_session
 # ############
 LOGGER = logging.getLogger("api")
 
-SETTINGS = get_settings()
+SETTINGS = _Settings.get_settings()
 
 if SETTINGS.sentry_dsn:  # pragma: no cover
     sentry_sdk.init(dsn=SETTINGS.sentry_dsn)
@@ -112,7 +112,6 @@ async def handle_validation_error(
 # Include routers.
 APP.include_router(V1, prefix="", tags=["v1"])
 APP.include_router(V2, prefix="/v2", tags=["v2"])
-
 
 # Running of app.
 if __name__ == "__main__":

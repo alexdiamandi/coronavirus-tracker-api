@@ -5,11 +5,11 @@ from typing import Union
 
 import aiocache
 
-from .config import get_settings
+from .config import _Settings
 
 LOGGER = logging.getLogger(name="app.caches")
 
-SETTINGS = get_settings()
+SETTINGS = _Settings.get_settings()
 
 if SETTINGS.rediscloud_url:
     REDIS_URL = SETTINGS.rediscloud_url
